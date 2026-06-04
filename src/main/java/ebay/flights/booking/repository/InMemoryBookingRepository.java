@@ -1,5 +1,6 @@
-package ebay.flights.booking;
+package ebay.flights.booking.repository;
 
+import ebay.flights.booking.model.Booking;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

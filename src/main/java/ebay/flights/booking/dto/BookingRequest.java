@@ -3,7 +3,7 @@ package ebay.flights.booking.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public record CreateBookingRequest(
+public record BookingRequest(
         @NotBlank(message = "Flight ID is required")
         String flightId,
 

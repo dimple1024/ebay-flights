@@ -39,14 +39,6 @@ public class GlobalExceptionHandler {
                 .body(ErrorResponse.of("FLIGHT_NOT_AVAILABLE", ex.getMessage(), request.getRequestURI()));
     }
 
-    @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> handleBusiness(
-            BusinessException ex, HttpServletRequest request) {
-        log.warn("Business rule violation [{}]: {}", ex.getCode(), ex.getMessage());
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-                .body(ErrorResponse.of(ex.getCode(), ex.getMessage(), request.getRequestURI()));
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(
             MethodArgumentNotValidException ex, HttpServletRequest request) {
@@ -54,7 +46,7 @@ public class GlobalExceptionHandler {
                 .map(e -> e.getField() + ": " + e.getDefaultMessage())
                 .toList();
         return ResponseEntity.badRequest()
-                .body(ErrorResponse.ofValidation(request.getRequestURI(), fieldErrors));
+                .body(ErrorResponse.of(request.getRequestURI(), fieldErrors));
     }
 
     @ExceptionHandler(Exception.class)

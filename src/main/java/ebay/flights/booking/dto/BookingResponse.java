@@ -1,6 +1,6 @@
 package ebay.flights.booking.dto;
 
-import ebay.flights.booking.BookingStatus;
+import ebay.flights.booking.model.BookingStatus;
 
 import java.time.LocalDateTime;
 

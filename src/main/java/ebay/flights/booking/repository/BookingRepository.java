@@ -1,4 +1,6 @@
-package ebay.flights.booking;
+package ebay.flights.booking.repository;
+
+import ebay.flights.booking.model.Booking;
 
 import java.util.List;
 import java.util.Optional;

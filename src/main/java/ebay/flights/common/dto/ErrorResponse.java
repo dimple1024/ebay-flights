@@ -14,7 +14,7 @@ public record ErrorResponse(
         return new ErrorResponse(code, message, Instant.now(), path, List.of());
     }
 
-    public static ErrorResponse ofValidation(String path, List<String> fieldErrors) {
+    public static ErrorResponse of(String path, List<String> fieldErrors) {
         return new ErrorResponse("VALIDATION_ERROR", "Validation failed", Instant.now(), path, fieldErrors);
     }
 }
