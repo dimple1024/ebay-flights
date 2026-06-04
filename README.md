@@ -196,7 +196,7 @@ No thread is ever blocked. Contention causes a brief spin that resolves in O(n) 
 ### NOTE :
 I used the needed claude skills from here: https://github.com/decebals/claude-code-java
 
-### Things that I would if had more time:
+### Things that I would have done if had more time:
 - Logically I think the code works all fine, allows you to book flight (only the ones which is seeded from DataInitialiser)
 - I would have done more things like:
   - Added Javadocs
