@@ -193,12 +193,14 @@ read current seats
 
 No thread is ever blocked. Contention causes a brief spin that resolves in O(n) retries for n concurrent threads, each making progress.
 
+### NOTE :
+I used the needed claude skills from here: https://github.com/decebals/claude-code-java
 
 ### Things that I would if had more time:
 - Logically I think the code works all fine, allows you to book flight (only the ones which is seeded from DataInitialiser)
 - I would have done more things like:
-  - Javadocs
+  - Added Javadocs
   - Review pom.xml for unncessary / redundant dependencies
   - Reviewed Datainialiser for appropriate way of seeding data into flightRepository
   - Reviewed tests/ added more to gain more confidence into solution
-  - More aggressive review on the overall code review, keeping only what's needed.
+  - More aggressive review on the overall code, keeping only what's needed and enforcing KISS, YAGNI.
