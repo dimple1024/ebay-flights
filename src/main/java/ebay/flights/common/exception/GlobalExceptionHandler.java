@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -29,6 +30,13 @@ public class GlobalExceptionHandler {
         log.warn("Overbooking attempt on flight: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ErrorResponse.of("OVERBOOKING", ex.getMessage(), request.getRequestURI()));
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleUnreadableBody(
+            HttpMessageNotReadableException ex, HttpServletRequest request) {
+        return ResponseEntity.badRequest()
+                .body(ErrorResponse.of("BAD_REQUEST", "Request body is missing or malformed", request.getRequestURI()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
