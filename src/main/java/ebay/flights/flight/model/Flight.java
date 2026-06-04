@@ -37,7 +37,6 @@ public class Flight {
     public boolean tryReserveSeat() {
         int current;
         do {
-            if (!isBookable()) return false;
             current = availableSeats.get();
             if (current <= 0) return false;
         } while (!availableSeats.compareAndSet(current, current - 1));
@@ -50,15 +49,5 @@ public class Flight {
             current = availableSeats.get();
             if (current >= totalSeats) return;
         } while (!availableSeats.compareAndSet(current, current + 1));
-    }
-
-    public boolean isBookable() {
-        return status == FlightStatus.SCHEDULED || status == FlightStatus.BOARDING;
-    }
-
-    public void cancel() {
-        // Zero seats first so in-flight CAS loops see no capacity before they see CANCELLED
-        availableSeats.set(0);
-        this.status = FlightStatus.CANCELLED;
     }
 }
