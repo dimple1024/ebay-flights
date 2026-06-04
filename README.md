@@ -63,7 +63,7 @@ On startup, two sample flights are seeded automatically with **fixed IDs** (same
 
 ## Example curl commands
 
-### Book a seat on AA100 (150 seats)
+### Book a seat on AA100 (150 seats) (seed sampled flight info into flight repository)
 
 ```bash
 curl -s -X POST http://localhost:8080/api/v1/bookings \
@@ -90,7 +90,7 @@ Expected response (`201 Created`):
 
 ---
 
-### Trigger overbooking on UA200 (2 seats only)
+### Trigger overbooking on UA200 (2 seats only) (seed sampled flight info into flight repository)
 
 Run this three times in quick succession — the third request will be rejected:
 
@@ -192,3 +192,13 @@ read current seats
 ```
 
 No thread is ever blocked. Contention causes a brief spin that resolves in O(n) retries for n concurrent threads, each making progress.
+
+
+### Things that I would if had more time:
+- Logically I think the code works all fine, allows you to book flight (only the ones which is seeded from DataInitialiser)
+- I would have done more things like:
+  - Javadocs
+  - Review pom.xml for unncessary / redundant dependencies
+  - Reviewed Datainialiser for appropriate way of seeding data into flightRepository
+  - Reviewed tests/ added more to gain more confidence into solution
+  - More aggressive review on the overall code review, keeping only what's needed.
