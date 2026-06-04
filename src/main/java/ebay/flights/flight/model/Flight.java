@@ -1,4 +1,4 @@
-package ebay.flights.flight;
+package ebay.flights.flight.model;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,8 +22,6 @@ public class Flight {
     // AtomicInteger allows CAS-based seat management without blocking
     @Getter(AccessLevel.NONE)
     private final AtomicInteger availableSeats;
-
-    private volatile FlightStatus status;
 
     public int getAvailableSeats() {
         return availableSeats.get();

@@ -31,14 +31,6 @@ public class GlobalExceptionHandler {
                 .body(ErrorResponse.of("OVERBOOKING", ex.getMessage(), request.getRequestURI()));
     }
 
-    @ExceptionHandler(FlightNotAvailableException.class)
-    public ResponseEntity<ErrorResponse> handleFlightNotAvailable(
-            FlightNotAvailableException ex, HttpServletRequest request) {
-        log.warn("Flight not available: {}", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(ErrorResponse.of("FLIGHT_NOT_AVAILABLE", ex.getMessage(), request.getRequestURI()));
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(
             MethodArgumentNotValidException ex, HttpServletRequest request) {

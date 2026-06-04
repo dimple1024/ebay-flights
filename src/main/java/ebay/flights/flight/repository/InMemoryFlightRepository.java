@@ -1,5 +1,6 @@
-package ebay.flights.flight;
+package ebay.flights.flight.repository;
 
+import ebay.flights.flight.model.Flight;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,15 +22,5 @@ class InMemoryFlightRepository implements FlightRepository {
     @Override
     public Optional<Flight> findById(String id) {
         return Optional.ofNullable(store.get(id));
-    }
-
-    @Override
-    public List<Flight> findAll() {
-        return List.copyOf(store.values());
-    }
-
-    @Override
-    public boolean existsById(String id) {
-        return store.containsKey(id);
     }
 }

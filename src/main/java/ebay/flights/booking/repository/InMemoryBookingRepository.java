@@ -23,16 +23,4 @@ class InMemoryBookingRepository implements BookingRepository {
     public Optional<Booking> findById(String id) {
         return Optional.ofNullable(store.get(id));
     }
-
-    @Override
-    public List<Booking> findAll() {
-        return List.copyOf(store.values());
-    }
-
-    @Override
-    public List<Booking> findByFlightId(String flightId) {
-        return store.values().stream()
-                .filter(b -> b.getFlightId().equals(flightId))
-                .toList();
-    }
 }

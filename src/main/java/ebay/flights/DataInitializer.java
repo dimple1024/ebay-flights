@@ -1,8 +1,7 @@
 package ebay.flights;
 
-import ebay.flights.flight.Flight;
-import ebay.flights.flight.FlightRepository;
-import ebay.flights.flight.FlightStatus;
+import ebay.flights.flight.model.Flight;
+import ebay.flights.flight.repository.FlightRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -10,13 +9,16 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class DataInitializer {
+
+    // Fixed IDs — stable across restarts; used in README curl examples and tests
+    public static final String AA100_ID = "00000000-0000-0000-0000-000000000001";
+    public static final String UA200_ID = "00000000-0000-0000-0000-000000000002";
 
     private final FlightRepository flightRepository;
 
@@ -25,7 +27,7 @@ public class DataInitializer {
         LocalDateTime base = LocalDateTime.now().plusDays(1).withMinute(0).withSecond(0).withNano(0);
 
         flightRepository.save(Flight.builder()
-                .id(UUID.randomUUID().toString())
+                .id(AA100_ID)
                 .flightNumber("AA100")
                 .origin("New York")
                 .destination("Los Angeles")
@@ -33,11 +35,10 @@ public class DataInitializer {
                 .arrivalTime(base.withHour(14))
                 .totalSeats(150)
                 .availableSeats(new AtomicInteger(150))
-                .status(FlightStatus.SCHEDULED)
                 .build());
 
         flightRepository.save(Flight.builder()
-                .id(UUID.randomUUID().toString())
+                .id(UA200_ID)
                 .flightNumber("UA200")
                 .origin("Chicago")
                 .destination("Miami")
@@ -45,9 +46,8 @@ public class DataInitializer {
                 .arrivalTime(base.withHour(14))
                 .totalSeats(2)
                 .availableSeats(new AtomicInteger(2))
-                .status(FlightStatus.SCHEDULED)
                 .build());
 
-        log.info("Sample flights seeded.");
+        log.info("Sample flights seeded: AA100 id={}, UA200 id={}", AA100_ID, UA200_ID);
     }
 }
